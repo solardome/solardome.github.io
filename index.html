@@ -1,616 +1,953 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Denis Miretsky — Security Platform Engineer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <title>Denis Miretsky — Senior Platform Engineer</title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:     #000;
-      --card:   #141414;
-      --border: rgba(255,255,255,.08);
-      --accent: #2997ff;
-      --green:  #30d158;
-      --text:   #f5f5f7;
-      --muted:  #6e6e73;
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    html { scroll-behavior: smooth; }
+    :root {
+      --bg: #000000;
+      --surface: rgba(18, 20, 24, 0.80);
+      --surface-strong: #12151a;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(255, 255, 255, 0.14);
+      --text: #f5f5f7;
+      --muted: #98989d;
+      --soft: #6e6e73;
+      --accent: #2997ff;
+      --accent-soft: rgba(41, 151, 255, 0.12);
+      --radius-xl: 32px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', -apple-system, sans-serif;
-      font-size: 15px;
-      line-height: 1.6;
       min-height: 100vh;
+      background: #000;
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
     }
 
     .wrapper {
-      max-width: 1080px;
+      width: min(1120px, calc(100% - 48px));
       margin: 0 auto;
-      padding: 0 32px;
     }
 
-    /* ── Nav ── */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--soft);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ─── Nav ─── */
     nav {
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(0,0,0,.8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(0, 0, 0, 0.80);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
     }
 
     nav .wrapper {
+      min-height: 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 52px;
+      gap: 24px;
     }
 
     .nav-logo {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text);
       text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
     }
 
     .nav-links {
-      display: flex;
-      gap: 32px;
       list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 32px;
     }
 
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 13px;
-      transition: color .18s;
+      font-size: 14px;
+      font-weight: 400;
+      transition: color 0.15s ease;
     }
 
-    .nav-links a:hover { color: var(--text); }
-
-    /* ── Hero ── */
-    .hero {
-      min-height: calc(100vh - 52px);
-      display: flex;
-      align-items: center;
-      padding: 64px 0;
-      text-align: center;
-    }
-
-    .hero .wrapper { width: 100%; }
-
-    .hero-inner {
-      max-width: 640px;
-      margin: 0 auto;
-    }
-
-    .hero-label {
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      font-size: clamp(52px, 8vw, 88px);
-      font-weight: 700;
-      letter-spacing: -.04em;
-      line-height: 1.02;
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
       color: var(--text);
-      margin-bottom: 22px;
     }
 
-    .hero-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--green);
+    .nav-cta {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+      transition: opacity 0.15s ease;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.75;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      padding: 104px 0 96px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+      gap: 80px;
+      align-items: start;
+    }
+
+    .hero-copy .eyebrow {
       margin-bottom: 28px;
     }
 
-    .pulse-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--green);
-      position: relative;
-      flex-shrink: 0;
+    .hero-copy h1 {
+      font-size: clamp(56px, 7.5vw, 96px);
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+      color: var(--text);
     }
 
-    .pulse-dot::before {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      background: rgba(48,209,88,.35);
-      animation: pulse 2s ease-in-out infinite;
+    .hero-sub {
+      margin-top: 24px;
+      font-size: clamp(20px, 2.5vw, 26px);
+      line-height: 1.25;
+      letter-spacing: -0.025em;
+      font-weight: 600;
+      color: var(--text);
+      max-width: 22ch;
     }
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50%       { transform: scale(2.2); opacity: 0; }
-    }
-
-    .hero p {
+    .hero-lead {
+      margin-top: 20px;
+      max-width: 52ch;
       color: var(--muted);
       font-size: 17px;
       line-height: 1.65;
-      margin-bottom: 44px;
+      font-weight: 400;
     }
 
-    .social-links {
+    .hero-actions {
+      margin-top: 36px;
       display: flex;
-      gap: 10px;
-      justify-content: center;
       flex-wrap: wrap;
+      gap: 10px;
     }
 
-    .social-btn {
+    .button {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      border: 1px solid var(--border);
-      color: var(--text);
-      text-decoration: none;
-      font-size: 13px;
-      padding: 9px 20px;
+      justify-content: center;
+      height: 44px;
+      padding: 0 20px;
       border-radius: 980px;
-      background: var(--card);
-      transition: background .18s, border-color .18s;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+      transition: opacity 0.15s ease, transform 0.15s ease;
     }
 
-    .social-btn:hover {
-      background: #1d1d1f;
-      border-color: rgba(255,255,255,.16);
+    .button:hover,
+    .button:focus-visible {
+      opacity: 0.88;
+      transform: translateY(-1px);
     }
 
-    .social-btn-primary {
-      background: var(--text);
-      color: #000;
-      border-color: transparent;
+    .button-primary {
+      background: var(--accent);
+      color: #fff;
     }
 
-    .social-btn-primary:hover {
-      background: #e8e8ed;
-      border-color: transparent;
-    }
-
-    .social-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
-
-    /* ── Section ── */
-    .section { padding: 100px 0 80px; }
-
-    .section-header {
-      margin-bottom: 40px;
-    }
-
-    .section-header h2 {
-      font-size: 18px;
-      font-weight: 600;
+    .button-secondary {
+      border: 1px solid rgba(255, 255, 255, 0.22);
       color: var(--text);
-      letter-spacing: -.01em;
-      display: inline;
     }
 
-    .section-header .count {
-      display: inline-block;
-      background: rgba(255,255,255,.07);
-      color: var(--muted);
+    .button-secondary:hover,
+    .button-secondary:focus-visible {
+      border-color: rgba(255, 255, 255, 0.36);
+    }
+
+    /* Hero info sidebar */
+    .hero-info {
+      padding-top: 6px;
+    }
+
+    .hero-info-label {
       font-size: 11px;
       font-weight: 600;
-      padding: 2px 9px;
-      border-radius: 99px;
-      margin-left: 10px;
-      vertical-align: middle;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-bottom: 24px;
     }
 
-    /* ── Featured tiles ── */
-    .featured-grid {
+    .info-list {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+    }
+
+    .info-list>div {
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .info-list>div:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .info-list dt {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-bottom: 5px;
+    }
+
+    .info-list dd {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ─── Sections ─── */
+    main section {
+      padding: 104px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    main section:last-child {
+      border-bottom: none;
+    }
+
+    .section-label {
+      margin-bottom: 48px;
+    }
+
+    .section-label h2 {
+      margin-top: 14px;
+      font-size: clamp(36px, 4.5vw, 56px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+
+    .section-label p {
+      margin-top: 14px;
+      max-width: 52ch;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    /* ─── Focus grid ─── */
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 18px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
       overflow: hidden;
     }
 
-    .featured-card {
-      background: var(--card);
-      padding: 40px;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      transition: background .18s;
+    .focus-card {
+      padding: 32px 28px;
+      background: #000;
     }
 
-    .featured-card:hover { background: #1c1c1e; }
+    .focus-card h3 {
+      font-size: 19px;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
 
-    .featured-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--accent);
+    .focus-card p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    /* ─── Case studies ─── */
+    .case-list {
+      display: grid;
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+
+    .case-study {
+      padding: 44px;
+      background: #000;
+    }
+
+    .case-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 10px;
+    }
+
+    .case-kicker {
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: .06em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-    }
-
-    .featured-name {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -.02em;
-    }
-
-    .featured-desc {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .featured-highlights {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .highlight-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .highlight-item::before {
-      content: '–';
       color: var(--accent);
-      flex-shrink: 0;
-      line-height: 1.6;
     }
 
-    .featured-footer {
+    .case-link {
+      width: fit-content;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--accent);
+    }
+
+    .case-link:hover {
+      opacity: 0.75;
+    }
+
+    .case-study h3 {
+      font-size: clamp(28px, 3.5vw, 40px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .case-summary {
+      max-width: 60ch;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+
+    .case-stack {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-top: auto;
-      padding-top: 14px;
-      border-top: 1px solid var(--border);
+      gap: 8px;
+      margin-bottom: 36px;
     }
 
-    .repo-topic {
-      background: rgba(255,255,255,.05);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 11px;
+    .case-stack span {
+      padding: 5px 11px;
+      border-radius: 980px;
+      border: 1px solid rgba(41, 151, 255, 0.22);
+      color: #6aadff;
+      font-size: 12px;
       font-weight: 500;
-      padding: 3px 9px;
-      border-radius: 6px;
+      letter-spacing: 0.01em;
     }
 
-    /* ── Repo tiles ── */
-    .repo-grid {
+    .case-details {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 18px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .case-detail {
+      padding: 20px 22px;
+      background: rgba(255, 255, 255, 0.018);
+    }
+
+    .case-detail strong {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-bottom: 8px;
+    }
+
+    .case-detail p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    /* ─── Archive ─── */
+    .archive-topline {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .archive-link {
+      white-space: nowrap;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .archive-link:hover {
+      opacity: 0.75;
+    }
+
+    .archive-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
       overflow: hidden;
     }
 
     .repo-card {
-      background: var(--card);
-      padding: 28px;
+      min-height: 200px;
+      padding: 24px;
+      background: #000;
       text-decoration: none;
-      color: inherit;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      transition: background .18s;
+      gap: 12px;
+      transition: background 0.15s ease;
     }
 
-    .repo-card:hover { background: #1c1c1e; }
+    .repo-card:hover,
+    .repo-card:focus-visible {
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .archive-state {
+      grid-column: 1 / -1;
+      min-height: 180px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--muted);
+      background: #000;
+      border-radius: var(--radius-lg);
+    }
+
+    .repo-topline {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 12px;
+    }
 
     .repo-name {
-      font-size: 14px;
+      font-size: 16px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
       font-weight: 600;
       color: var(--text);
-      letter-spacing: -.01em;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
-    .repo-name svg { width: 13px; height: 13px; color: var(--muted); flex-shrink: 0; }
+    .repo-stars {
+      color: var(--soft);
+      font-size: 12px;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
 
     .repo-desc {
-      font-size: 13px;
       color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
       flex: 1;
-      line-height: 1.55;
+    }
+
+    .repo-topics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .repo-topic {
+      padding: 4px 9px;
+      border-radius: 980px;
+      border: 1px solid var(--line);
+      color: var(--soft);
+      font-size: 12px;
+      font-weight: 500;
     }
 
     .repo-meta {
       display: flex;
-      align-items: center;
-      gap: 14px;
       flex-wrap: wrap;
-    }
-
-    .lang-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-    .repo-lang { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); }
-    .repo-stars { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--muted); }
-    .repo-stars svg { width: 12px; height: 12px; }
-    .repo-card .repo-topics { display: flex; flex-wrap: wrap; gap: 6px; }
-
-    .lang-go      { background: #00add8; }
-    .lang-c       { background: #555597; }
-    .lang-js      { background: #f7df1e; }
-    .lang-ts      { background: #3178c6; }
-    .lang-python  { background: #3572a5; }
-    .lang-rust    { background: #dea584; }
-    .lang-default { background: #48484a; }
-
-    /* ── States ── */
-    .state-msg {
-      text-align: center;
-      padding: 56px;
-      color: var(--muted);
-      font-size: 14px;
-      grid-column: 1 / -1;
-      background: var(--card);
+      gap: 12px;
+      color: var(--soft);
+      font-size: 12px;
+      font-weight: 400;
+      margin-top: auto;
     }
 
     .spinner {
-      width: 28px; height: 28px;
-      border: 1.5px solid rgba(255,255,255,.1);
+      width: 24px;
+      height: 24px;
+      margin: 0 auto 12px;
+      border-radius: 980px;
+      border: 2px solid rgba(255, 255, 255, 0.08);
       border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin .8s linear infinite;
-      margin: 0 auto 14px;
+      animation: spin 0.75s linear infinite;
     }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ── Footer ── */
+    /* ─── Footer ─── */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 0;
-      text-align: center;
-      color: var(--muted);
-      font-size: 12px;
+      padding: 48px 0;
     }
 
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--text); }
-
-    /* ── Responsive ── */
-    @media (max-width: 860px) {
-      .featured-grid { grid-template-columns: 1fr; }
+    .footer-shell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      color: var(--soft);
+      font-size: 13px;
+      font-weight: 400;
     }
 
-    @media (max-width: 720px) {
-      .hero { min-height: calc(100svh - 52px); padding: 48px 0; }
-      .nav-links { display: none; }
-      .wrapper { padding: 0 20px; }
-      .section { padding: 72px 0 56px; }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: var(--soft);
+      transition: color 0.15s ease;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      color: var(--text);
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 960px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 52px;
+      }
+
+      .focus-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .case-details {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .archive-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      .wrapper {
+        width: min(1120px, calc(100% - 32px));
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 64px 0 72px;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(44px, 14vw, 72px);
+      }
+
+      .hero-sub {
+        font-size: 19px;
+      }
+
+      .hero-lead {
+        font-size: 16px;
+      }
+
+      main section {
+        padding: 72px 0;
+      }
+
+      .case-study {
+        padding: 28px;
+      }
+
+      .focus-grid,
+      .case-details,
+      .archive-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .archive-topline,
+      .footer-shell {
+        flex-direction: column;
+        align-items: start;
+        gap: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
     }
   </style>
 </head>
-<body>
 
+<body>
   <nav>
     <div class="wrapper">
-      <a class="nav-logo" href="#">solardome</a>
+      <a class="nav-logo" href="#">Denis Miretsky</a>
       <ul class="nav-links">
-        <li><a href="#featured">Featured</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="https://github.com/solardome" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="#focus">Focus</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#archive">Archive</a></li>
       </ul>
+      <a class="nav-cta" href="mailto:miretskydenis@gmail.com">Get in touch</a>
     </div>
   </nav>
 
-  <section class="hero">
+  <header class="hero">
     <div class="wrapper">
-      <div class="hero-inner">
-        <div class="hero-label">Security Platform Engineer</div>
-        <h1>Denis Miretsky</h1>
-        <div class="hero-status">
-          <span class="pulse-dot"></span>
-          Available for new roles
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Senior Platform Engineer</div>
+          <h1>Denis<br>Miretsky</h1>
+          <p class="hero-sub">Security platform engineering, CI/CD, and DevEx tooling.</p>
+          <p class="hero-lead">
+            13 years building production systems at enterprise scale.</br>Go, Java and Python across
+            delivery pipelines, security automation, and developer workflows.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#work">View work</a>
+            <a class="button button-secondary" href="https://www.linkedin.com/in/denis-miretsky-30953462/"
+              target="_blank" rel="noopener">LinkedIn</a>
+            <a class="button button-secondary" href="https://github.com/solardome" target="_blank"
+              rel="noopener">GitHub</a>
+          </div>
         </div>
-        <p>13+ years building backend systems, security tooling, and CI/CD automation for large-scale enterprise environments. Go · Java · Python · AWS · Kubernetes.</p>
-        <div class="social-links">
-          <a class="social-btn social-btn-primary" href="https://www.linkedin.com/in/denis-miretsky-30953462/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            LinkedIn
-          </a>
-          <a class="social-btn" href="https://github.com/solardome" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-            GitHub
-          </a>
-          <a class="social-btn" href="mailto:miretskydenis@gmail.com">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            Contact
-          </a>
-        </div>
+
+        <aside class="hero-info">
+          <div class="hero-info-label">At a glance</div>
+          <dl class="info-list">
+            <div>
+              <dt>Experience</dt>
+              <dd>13+ years in production engineering</dd>
+            </div>
+            <div>
+              <dt>Primary stack</dt>
+              <dd>Go · Java · Python · Jenkins · GitHub Actions · AWS</dd>
+            </div>
+            <div>
+              <dt>Location</dt>
+              <dd>Kfar Saba, Israel</dd>
+            </div>
+            <div>
+              <dt>Credentials</dt>
+              <dd>ISC2 Certified in Cybersecurity · Two U.S. patents</dd>
+            </div>
+          </dl>
+        </aside>
       </div>
     </div>
-  </section>
+  </header>
 
-  <!-- Featured -->
-  <section class="section" id="featured">
-    <div class="wrapper">
-      <div class="section-header">
-        <h2>Featured Projects</h2>
-      </div>
+  <main>
+    <section id="focus">
+      <div class="wrapper">
+        <div class="section-label">
+          <span class="eyebrow">Focus</span>
+          <h2>What I work on</h2>
+          <p>Backend engineering, delivery infrastructure, and internal tools for large engineering organizations.</p>
+        </div>
 
-      <div class="featured-grid">
+        <div class="focus-grid">
+          <article class="focus-card">
+            <h3>Developer tooling</h3>
+            <p>Go-based CLIs, internal services, and utilities that remove repetitive work from engineering teams.</p>
+          </article>
 
-        <a class="featured-card" href="https://github.com/solardome/security-gate" target="_blank" rel="noopener">
-          <div class="featured-label">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-            Security Tooling
-          </div>
-          <div class="featured-name">security-gate</div>
-          <div class="featured-desc">
-            CLI tool that ingests vulnerability scanner output from Trivy, Snyk, SARIF, Checkmarx, and SonarQube,
-            normalizes findings into a unified model, and applies a deterministic policy engine to emit
-            auditable <strong style="color:var(--text)">ALLOW / WARN / BLOCK</strong> release decisions with full decision traces.
-          </div>
-          <div class="featured-highlights">
-            <div class="highlight-item">Deterministic policy engine — same inputs always produce the same decision and trace</div>
-            <div class="highlight-item">5 scanner adapters with strict envelope validation (Trivy, SARIF 2.1, Snyk, Checkmarx, Sonar)</div>
-            <div class="highlight-item">Baseline diff mode for PR workflows — only gates on new findings</div>
-            <div class="highlight-item">Interface-based adapters, structured logging, fuzz tests for all parsers</div>
-          </div>
-          <div class="featured-footer">
-            <span class="repo-topic">Go</span>
-            <span class="repo-topic">DevSecOps</span>
-            <span class="repo-topic">CI/CD</span>
-            <span class="repo-topic">Policy Engine</span>
-            <span class="repo-topic">SARIF</span>
-          </div>
-        </a>
+          <article class="focus-card">
+            <h3>Release engineering</h3>
+            <p>CI/CD pipelines, shared libraries, artifact promotion, and delivery workflows for large systems.</p>
+          </article>
 
-        <a class="featured-card" href="https://github.com/solardome/mini-kvstore" target="_blank" rel="noopener">
-          <div class="featured-label">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-            Systems Programming
-          </div>
-          <div class="featured-name">mini-kvstore</div>
-          <div class="featured-desc">
-            In-memory key-value store in C — hash table with open addressing, O(1) average-case
-            get/set/delete, and a read-write lock for concurrent access. Every commit runs ASan and UBSan
-            in CI; zero sanitizer warnings shipped.
-          </div>
-          <div class="featured-highlights">
-            <div class="highlight-item">Hash table with open addressing and linear probing — no external allocator dependencies</div>
-            <div class="highlight-item">Reader-writer lock for safe concurrent access without global serialization</div>
-            <div class="highlight-item">AddressSanitizer + UndefinedBehaviorSanitizer enforced in GitHub Actions on every push</div>
-            <div class="highlight-item">CMake build with separate Debug/Release targets; valgrind clean in Debug mode</div>
-          </div>
-          <div class="featured-footer">
-            <span class="repo-topic">C</span>
-            <span class="repo-topic">CMake</span>
-            <span class="repo-topic">GitHub Actions</span>
-            <span class="repo-topic">Sanitizers</span>
-            <span class="repo-topic">DevSecOps</span>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- All Projects -->
-  <section class="section" id="projects">
-    <div class="wrapper">
-      <div class="section-header">
-        <h2>All Projects</h2><span class="count" id="projects-count">—</span>
-      </div>
-      <div class="repo-grid" id="projects-grid">
-        <div class="state-msg">
-          <div class="spinner"></div>
-          Fetching repositories…
+          <article class="focus-card">
+            <h3>Security controls</h3>
+            <p>SAST/SCA gates, IAM workflows, CVE triage, and policy checks integrated into delivery.</p>
+          </article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section id="work">
+      <div class="wrapper">
+        <div class="section-label">
+          <span class="eyebrow">Selected Work</span>
+          <h2>Production work</h2>
+          <p>A public Go tool and enterprise platform work from Amdocs.</p>
+        </div>
+
+        <div class="case-list">
+          <article class="case-study">
+            <div class="case-header">
+              <div class="case-kicker">Security Tooling</div>
+              <a class="case-link" href="https://github.com/solardome/security-gate" target="_blank" rel="noopener">Open
+                repository</a>
+            </div>
+
+            <h3>security-gate</h3>
+            <p class="case-summary">
+              Go CLI for normalizing scanner findings and applying deterministic policy rules to emit auditable
+              <strong>ALLOW / WARN / BLOCK</strong> release decisions.
+            </p>
+
+            <div class="case-stack">
+              <span>Go</span>
+              <span>Policy Engine</span>
+              <span>SARIF</span>
+              <span>CI/CD</span>
+            </div>
+
+            <div class="case-details">
+              <div class="case-detail">
+                <strong>Problem</strong>
+                <p>Scanner outputs vary by tool and format. Without a common model, release gating becomes inconsistent.
+                </p>
+              </div>
+              <div class="case-detail">
+                <strong>Approach</strong>
+                <p>Separate adapters, normalization, and policy evaluation so integrations can expand without breaking
+                  the model.</p>
+              </div>
+              <div class="case-detail">
+                <strong>Quality bar</strong>
+                <p>Validation, baseline diffs, structured logging, and fuzz tests keep behavior deterministic under real
+                  inputs.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="case-study">
+            <div class="case-header">
+              <div class="case-kicker">Enterprise Platform Engineering</div>
+              <span class="case-link" style="color: var(--soft); cursor: default;">Private production work</span>
+            </div>
+
+            <h3>Amdocs platform automation</h3>
+            <p class="case-summary">
+              CI/CD pipelines, internal Go tools, and security-aware automation for enterprise systems — release
+              orchestration, data transformation, privileged account migration, and governance workflows.
+            </p>
+
+            <div class="case-stack">
+              <span>Go</span>
+              <span>Jenkins</span>
+              <span>AWS</span>
+              <span>CyberArk</span>
+            </div>
+
+            <div class="case-details">
+              <div class="case-detail">
+                <strong>Problem</strong>
+                <p>Large delivery environments accumulate fragmented pipelines, manual checks, and security-sensitive
+                  workflows.</p>
+              </div>
+              <div class="case-detail">
+                <strong>Approach</strong>
+                <p>Combine Jenkins Shared Libraries, Go-based tooling, validation layers, and controls to make workflows
+                  repeatable.</p>
+              </div>
+              <div class="case-detail">
+                <strong>Quality bar</strong>
+                <p>Artifact promotion, IAM governance, Active Directory validation, structured logging, and auditability
+                  where needed.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="archive">
+      <div class="wrapper">
+        <div class="archive-topline">
+          <div class="section-label" style="margin-bottom: 0;">
+            <span class="eyebrow">Archive</span>
+            <h2>Open source</h2>
+          </div>
+          <a class="archive-link" href="https://github.com/solardome" target="_blank" rel="noopener">View all on
+            GitHub</a>
+        </div>
+
+        <div class="archive-grid" id="projects-grid">
+          <div class="archive-state">
+            <div>
+              <div class="spinner"></div>
+              Loading repository archive…
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <div class="wrapper">
-      © 2026 Denis Miretsky ·
-      <a href="https://github.com/solardome" target="_blank" rel="noopener">github.com/solardome</a>
+    <div class="wrapper footer-shell">
+      <div>© 2026 Denis Miretsky</div>
+      <div class="footer-links">
+        <a href="mailto:miretskydenis@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/denis-miretsky-30953462/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/solardome" target="_blank" rel="noopener">GitHub</a>
+      </div>
     </div>
   </footer>
 
   <script>
-    const GITHUB_USER = 'solardome';
-    const SITE_REPO   = `${GITHUB_USER}.github.io`;
-
-    const langColors = {
-      Go: 'lang-go', C: 'lang-c', JavaScript: 'lang-js',
-      TypeScript: 'lang-ts', Python: 'lang-python', Rust: 'lang-rust',
-    };
-
-    function langClass(l) { return langColors[l] || 'lang-default'; }
+    const GITHUB_USER = "solardome";
+    const SITE_REPO = `${GITHUB_USER}.github.io`;
+    const ARCHIVE_LIMIT = 6;
 
     function repoCard(repo) {
-      const desc    = repo.description || '<em style="opacity:.5">No description</em>';
-      const langDot = repo.language
-        ? `<span class="repo-lang"><span class="lang-dot ${langClass(repo.language)}"></span>${repo.language}</span>` : '';
-      const stars = repo.stargazers_count > 0
-        ? `<span class="repo-stars">
-             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-             ${repo.stargazers_count}
-           </span>` : '';
-      const topics = (repo.topics || []).length
-        ? `<div class="repo-topics">${repo.topics.map(t => `<span class="repo-topic">${t}</span>`).join('')}</div>` : '';
+      const desc = repo.description || "Repository details available on GitHub.";
+      const topics = (repo.topics || []).slice(0, 3);
+      const stars = repo.stargazers_count > 0 ? `${repo.stargazers_count} stars` : null;
+      const updated = new Date(repo.updated_at).toLocaleDateString("en-US", {
+        month: "short",
+        year: "numeric",
+      });
 
       return `
         <a class="repo-card" href="https://github.com/${GITHUB_USER}/${repo.name}" target="_blank" rel="noopener">
-          <div class="repo-name">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 3h6l3 3 3-3h6v6l-3 3 3 3v6h-6l-3-3-3 3H3v-6l3-3-3-3V3z"/>
-            </svg>
-            ${repo.name}
+          <div class="repo-topline">
+            <div class="repo-name">${repo.name}</div>
+            ${stars ? `<div class="repo-stars">${stars}</div>` : ""}
           </div>
           <div class="repo-desc">${desc}</div>
-          ${topics}
-          <div class="repo-meta">${langDot}${stars}</div>
-        </a>`;
+          <div class="repo-topics">
+            ${topics.length ? topics.map((t) => `<span class="repo-topic">${t}</span>`).join("") : `<span class="repo-topic">${repo.language || "Code"}</span>`}
+          </div>
+          <div class="repo-meta">
+            <span>${repo.language || "Multi-language"}</span>
+            <span>Updated ${updated}</span>
+          </div>
+        </a>
+      `;
     }
 
     async function loadRepos() {
       let repos = [];
-      let page  = 1;
+      let page = 1;
 
       try {
         while (true) {
-          const res  = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&page=${page}`);
-          if (!res.ok) throw new Error(res.status);
-          const data = await res.json();
-          if (!data.length) break;
-          repos = repos.concat(data);
-          if (data.length < 100) break;
-          page++;
+          const response = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&page=${page}`);
+          if (!response.ok) throw new Error(response.status);
+          const batch = await response.json();
+          if (!batch.length) break;
+          repos = repos.concat(batch);
+          if (batch.length < 100) break;
+          page += 1;
         }
       } catch {
-        document.getElementById('projects-grid').innerHTML =
-          `<div class="state-msg">Could not load repositories. <a href="https://github.com/${GITHUB_USER}" style="color:var(--accent)">View on GitHub →</a></div>`;
+        document.getElementById("projects-grid").innerHTML = `
+          <div class="archive-state">
+            <div>
+              Could not load the repository archive.<br />
+              <a class="archive-link" href="https://github.com/${GITHUB_USER}" target="_blank" rel="noopener">Open GitHub instead</a>
+            </div>
+          </div>
+        `;
         return;
       }
 
-      const own = repos
-        .filter(r => !r.fork && r.name !== SITE_REPO)
-        .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.updated_at) - new Date(a.updated_at));
+      const ownRepos = repos
+        .filter((repo) => !repo.fork && repo.name !== SITE_REPO)
+        .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.updated_at) - new Date(a.updated_at))
+        .slice(0, ARCHIVE_LIMIT);
 
-      document.getElementById('projects-count').textContent = own.length;
-      document.getElementById('projects-grid').innerHTML = own.length
-        ? own.map(repoCard).join('')
-        : `<div class="state-msg">No projects yet.</div>`;
+      document.getElementById("projects-grid").innerHTML = ownRepos.length
+        ? ownRepos.map(repoCard).join("")
+        : `<div class="archive-state">No public repositories available right now.</div>`;
     }
 
     loadRepos();
   </script>
 </body>
+
 </html>

@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Denis Miretsky — Security Platform Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #07071a;
+      --surface:   #0f0f2e;
+      --card:      #13133a;
+      --border:    #1e1e52;
+      --accent:    #7c3aed;
+      --accent2:   #38bdf8;
+      --text:      #e2e8f0;
+      --muted:     #94a3b8;
+      --tag-bg:    #1a1a4a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(124,58,237,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,58,237,.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7,7,26,.85);
+    }
+
+    nav .wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-logo {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent2);
+      text-decoration: none;
+      letter-spacing: .02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 96px 0 80px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(124,58,237,.15);
+      border: 1px solid rgba(124,58,237,.3);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 99px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 56px);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #e2e8f0 0%, #7c3aed 55%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 540px;
+      margin: 0 auto 36px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 6px;
+      transition: border-color .2s, color .2s;
+    }
+
+    .tag:hover { border-color: var(--accent); color: var(--text); }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 9px 18px;
+      border-radius: 8px;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+
+    .social-btn:hover {
+      border-color: var(--accent2);
+      color: var(--accent2);
+      background: rgba(56,189,248,.06);
+    }
+
+    .social-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* ── Section ── */
+    .section { padding: 64px 0; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .section-header h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .section-header .count {
+      background: rgba(124,58,237,.2);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 99px;
+    }
+
+    .section-divider {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Featured cards ── */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+      gap: 20px;
+    }
+
+    .featured-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    .featured-card:hover {
+      border-color: rgba(124,58,237,.6);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(124,58,237,.15);
+    }
+
+    .featured-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(124,58,237,.15);
+      border: 1px solid rgba(124,58,237,.3);
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 4px;
+      width: fit-content;
+    }
+
+    .featured-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -.01em;
+    }
+
+    .featured-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .featured-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .highlight-item::before {
+      content: '→';
+      color: var(--accent2);
+      flex-shrink: 0;
+      line-height: 1.6;
+    }
+
+    .featured-footer {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: auto;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    .featured-topics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .repo-topic {
+      background: rgba(56,189,248,.08);
+      border: 1px solid rgba(56,189,248,.15);
+      color: var(--accent2);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* ── Regular repo grid ── */
+    .repo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .repo-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .repo-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0;
+      transition: opacity .2s;
+    }
+
+    .repo-card:hover {
+      border-color: rgba(124,58,237,.5);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(124,58,237,.12);
+    }
+
+    .repo-card:hover::before { opacity: 1; }
+
+    .repo-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .repo-name svg { width: 14px; height: 14px; color: var(--muted); flex-shrink: 0; }
+
+    .repo-desc {
+      font-size: 13px;
+      color: var(--muted);
+      flex: 1;
+      line-height: 1.55;
+    }
+
+    .repo-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .lang-dot {
+      display: inline-block;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .repo-lang {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .repo-stars {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .repo-stars svg { width: 13px; height: 13px; }
+
+    .repo-card .repo-topics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .lang-go      { background: #00add8; }
+    .lang-c       { background: #555597; }
+    .lang-js      { background: #f7df1e; }
+    .lang-ts      { background: #3178c6; }
+    .lang-python  { background: #3572a5; }
+    .lang-rust    { background: #dea584; }
+    .lang-default { background: #6e7681; }
+
+    /* ── States ── */
+    .state-msg {
+      text-align: center;
+      padding: 48px;
+      color: var(--muted);
+      font-size: 14px;
+      grid-column: 1 / -1;
+    }
+
+    .spinner {
+      width: 32px; height: 32px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    footer a { color: var(--accent2); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 720px) {
+      .featured-grid { grid-template-columns: 1fr; }
+      .hero { padding: 64px 0 56px; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="wrapper">
+      <a class="nav-logo" href="#">solardome</a>
+      <ul class="nav-links">
+        <li><a href="#featured">Featured</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="https://github.com/solardome" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="wrapper">
+      <div class="hero-badge">Open to opportunities</div>
+      <h1>Denis Miretsky</h1>
+      <p>Security Platform Engineer building backend systems, security tooling, and DevSecOps pipelines.</p>
+
+      <div class="tags">
+        <span class="tag">Go</span>
+        <span class="tag">Systems Programming</span>
+        <span class="tag">DevSecOps</span>
+        <span class="tag">Security Tooling</span>
+        <span class="tag">CI/CD</span>
+        <span class="tag">Security Platform Engineering</span>
+        <span class="tag">Backend Engineering</span>
+      </div>
+
+      <div class="social-links">
+        <a class="social-btn" href="https://github.com/solardome" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+        <a class="social-btn" href="mailto:miretskydenis@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Contact
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured -->
+  <section class="section" id="featured">
+    <div class="wrapper">
+      <div class="section-header">
+        <h2>Featured Projects</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="featured-grid">
+
+        <!-- security-gate -->
+        <a class="featured-card" href="https://github.com/solardome/security-gate" target="_blank" rel="noopener">
+          <div class="featured-label">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+            Security Tooling
+          </div>
+          <div class="featured-name">security-gate</div>
+          <div class="featured-desc">
+            A CLI tool that ingests vulnerability scanner output from Trivy, Snyk, SARIF, Checkmarx, and SonarQube,
+            normalizes findings into a unified model, and applies a deterministic policy engine to emit
+            auditable <strong style="color:var(--text)">ALLOW / WARN / BLOCK</strong> release decisions with full decision traces.
+          </div>
+          <div class="featured-highlights">
+            <div class="highlight-item">Deterministic policy engine — same inputs always produce the same decision and trace</div>
+            <div class="highlight-item">5 scanner adapters with strict envelope validation (Trivy, SARIF 2.1, Snyk, Checkmarx, Sonar)</div>
+            <div class="highlight-item">Baseline diff mode for PR workflows — only gates on new findings</div>
+            <div class="highlight-item">Built in Go: interface-based adapters, structured logging, fuzz tests for all parsers</div>
+          </div>
+          <div class="featured-footer">
+            <div class="featured-topics">
+              <span class="repo-topic">Go</span>
+              <span class="repo-topic">DevSecOps</span>
+              <span class="repo-topic">CI/CD</span>
+              <span class="repo-topic">Policy Engine</span>
+              <span class="repo-topic">SARIF</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- mini-kvstore -->
+        <a class="featured-card" href="https://github.com/solardome/mini-kvstore" target="_blank" rel="noopener">
+          <div class="featured-label">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            Systems Programming
+          </div>
+          <div class="featured-name">mini-kvstore</div>
+          <div class="featured-desc">
+            A minimal in-memory key-value store written in C, built with CMake, and shipped with a
+            production-grade CI/CD pipeline — demonstrating systems-level engineering with modern DevSecOps practices.
+          </div>
+          <div class="featured-highlights">
+            <div class="highlight-item">Written in C with CMake build system</div>
+            <div class="highlight-item">CI/CD pipeline with GitHub Actions, address and undefined-behavior sanitizers</div>
+            <div class="highlight-item">Applies DevSecOps principles at the systems layer</div>
+          </div>
+          <div class="featured-footer">
+            <div class="featured-topics">
+              <span class="repo-topic">C</span>
+              <span class="repo-topic">CMake</span>
+              <span class="repo-topic">GitHub Actions</span>
+              <span class="repo-topic">Sanitizers</span>
+              <span class="repo-topic">DevSecOps</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- All Projects -->
+  <section class="section" id="projects">
+    <div class="wrapper">
+      <div class="section-header">
+        <h2>All Projects</h2>
+        <span class="count" id="projects-count">—</span>
+        <div class="section-divider"></div>
+      </div>
+      <div class="repo-grid" id="projects-grid">
+        <div class="state-msg">
+          <div class="spinner"></div>
+          Fetching repositories…
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrapper">
+      Built with the <a href="https://docs.github.com/en/rest" target="_blank" rel="noopener">GitHub REST API</a> ·
+      <a href="https://github.com/solardome" target="_blank" rel="noopener">github.com/solardome</a>
+    </div>
+  </footer>
+
+  <script>
+    const GITHUB_USER  = 'solardome';
+    const SITE_REPO    = `${GITHUB_USER}.github.io`;
+    const FEATURED_IDS = ['security-gate', 'mini-kvstore'];
+
+    const langColors = {
+      Go: 'lang-go', C: 'lang-c', JavaScript: 'lang-js',
+      TypeScript: 'lang-ts', Python: 'lang-python', Rust: 'lang-rust',
+    };
+
+    function langClass(l) { return langColors[l] || 'lang-default'; }
+
+    function repoCard(repo) {
+      const desc    = repo.description || '<em style="opacity:.6">No description</em>';
+      const langDot = repo.language
+        ? `<span class="repo-lang"><span class="lang-dot ${langClass(repo.language)}"></span>${repo.language}</span>` : '';
+      const stars = repo.stargazers_count > 0
+        ? `<span class="repo-stars">
+             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+             ${repo.stargazers_count}
+           </span>` : '';
+      const topics = (repo.topics || []).length
+        ? `<div class="repo-topics">${repo.topics.map(t => `<span class="repo-topic">${t}</span>`).join('')}</div>` : '';
+
+      return `
+        <a class="repo-card" href="https://github.com/${GITHUB_USER}/${repo.name}" target="_blank" rel="noopener">
+          <div class="repo-name">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3h6l3 3 3-3h6v6l-3 3 3 3v6h-6l-3-3-3 3H3v-6l3-3-3-3V3z"/>
+            </svg>
+            ${repo.name}
+          </div>
+          <div class="repo-desc">${desc}</div>
+          ${topics}
+          <div class="repo-meta">${langDot}${stars}</div>
+        </a>`;
+    }
+
+    async function loadRepos() {
+      let repos = [];
+      let page  = 1;
+
+      try {
+        while (true) {
+          const res  = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&page=${page}`);
+          if (!res.ok) throw new Error(res.status);
+          const data = await res.json();
+          if (!data.length) break;
+          repos = repos.concat(data);
+          if (data.length < 100) break;
+          page++;
+        }
+      } catch {
+        document.getElementById('projects-grid').innerHTML =
+          `<div class="state-msg">Could not load repositories. <a href="https://github.com/${GITHUB_USER}" style="color:var(--accent2)">View on GitHub →</a></div>`;
+        return;
+      }
+
+      const own = repos
+        .filter(r => !r.fork && r.name !== SITE_REPO)
+        .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.updated_at) - new Date(a.updated_at));
+
+      document.getElementById('projects-count').textContent = own.length;
+      document.getElementById('projects-grid').innerHTML = own.length
+        ? own.map(repoCard).join('')
+        : `<div class="state-msg">No projects yet.</div>`;
+    }
+
+    loadRepos();
+  </script>
+</body>
+</html>

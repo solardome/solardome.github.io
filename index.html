@@ -11,15 +11,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #07071a;
-      --surface:   #0f0f2e;
-      --card:      #13133a;
-      --border:    #1e1e52;
-      --accent:    #7c3aed;
-      --accent2:   #38bdf8;
-      --text:      #e2e8f0;
-      --muted:     #94a3b8;
-      --tag-bg:    #1a1a4a;
+      --bg:     #000;
+      --card:   #141414;
+      --border: rgba(255,255,255,.08);
+      --accent: #2997ff;
+      --green:  #30d158;
+      --text:   #f5f5f7;
+      --muted:  #6e6e73;
     }
 
     html { scroll-behavior: smooth; }
@@ -27,60 +25,47 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', -apple-system, sans-serif;
       font-size: 15px;
       line-height: 1.6;
       min-height: 100vh;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(124,58,237,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(124,58,237,.03) 1px, transparent 1px);
-      background-size: 48px 48px;
-      pointer-events: none;
-      z-index: 0;
+      -webkit-font-smoothing: antialiased;
     }
 
     .wrapper {
-      position: relative;
-      z-index: 1;
-      max-width: 1100px;
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 32px;
     }
 
     /* ── Nav ── */
     nav {
       border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(7,7,26,.85);
+      background: rgba(0,0,0,.8);
     }
 
     nav .wrapper {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 56px;
+      height: 52px;
     }
 
     .nav-logo {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--accent2);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
       text-decoration: none;
-      letter-spacing: .02em;
     }
 
     .nav-links {
       display: flex;
-      gap: 28px;
+      gap: 32px;
       list-style: none;
     }
 
@@ -88,295 +73,273 @@
       color: var(--muted);
       text-decoration: none;
       font-size: 13px;
-      font-weight: 500;
-      transition: color .2s;
+      transition: color .18s;
     }
 
     .nav-links a:hover { color: var(--text); }
 
     /* ── Hero ── */
     .hero {
-      padding: 96px 0 80px;
+      min-height: calc(100vh - 52px);
+      display: flex;
+      align-items: center;
+      padding: 64px 0;
       text-align: center;
     }
 
-    .hero-badge {
-      display: inline-block;
-      background: rgba(124,58,237,.15);
-      border: 1px solid rgba(124,58,237,.3);
-      color: var(--accent);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .1em;
+    .hero .wrapper { width: 100%; }
+
+    .hero-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .06em;
       text-transform: uppercase;
-      padding: 4px 14px;
-      border-radius: 99px;
-      margin-bottom: 24px;
+      color: var(--accent);
+      margin-bottom: 20px;
     }
 
     .hero h1 {
-      font-size: clamp(32px, 6vw, 56px);
+      font-size: clamp(52px, 8vw, 88px);
       font-weight: 700;
-      letter-spacing: -.02em;
-      line-height: 1.1;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, #e2e8f0 0%, #7c3aed 55%, #38bdf8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      letter-spacing: -.04em;
+      line-height: 1.02;
+      color: var(--text);
+      margin-bottom: 22px;
+    }
+
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--green);
+      margin-bottom: 28px;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .pulse-dot::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: rgba(48,209,88,.35);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(2.2); opacity: 0; }
     }
 
     .hero p {
       color: var(--muted);
       font-size: 17px;
-      max-width: 540px;
-      margin: 0 auto 36px;
+      line-height: 1.65;
+      margin-bottom: 44px;
     }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
-      margin-bottom: 40px;
-    }
-
-    .tag {
-      background: var(--tag-bg);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 500;
-      padding: 5px 12px;
-      border-radius: 6px;
-      transition: border-color .2s, color .2s;
-    }
-
-    .tag:hover { border-color: var(--accent); color: var(--text); }
 
     .social-links {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       justify-content: center;
+      flex-wrap: wrap;
     }
 
     .social-btn {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 7px;
-      background: var(--card);
       border: 1px solid var(--border);
-      color: var(--muted);
+      color: var(--text);
       text-decoration: none;
       font-size: 13px;
-      font-weight: 500;
-      padding: 9px 18px;
-      border-radius: 8px;
-      transition: border-color .2s, color .2s, background .2s;
+      padding: 9px 20px;
+      border-radius: 980px;
+      background: var(--card);
+      transition: background .18s, border-color .18s;
     }
 
     .social-btn:hover {
-      border-color: var(--accent2);
-      color: var(--accent2);
-      background: rgba(56,189,248,.06);
+      background: #1d1d1f;
+      border-color: rgba(255,255,255,.16);
     }
 
-    .social-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .social-btn-primary {
+      background: var(--text);
+      color: #000;
+      border-color: transparent;
+    }
+
+    .social-btn-primary:hover {
+      background: #e8e8ed;
+      border-color: transparent;
+    }
+
+    .social-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
 
     /* ── Section ── */
-    .section { padding: 64px 0; }
+    .section { padding: 100px 0 80px; }
 
     .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 32px;
+      margin-bottom: 40px;
     }
 
     .section-header h2 {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 600;
       color: var(--text);
-      white-space: nowrap;
+      letter-spacing: -.01em;
+      display: inline;
     }
 
     .section-header .count {
-      background: rgba(124,58,237,.2);
-      color: var(--accent);
+      display: inline-block;
+      background: rgba(255,255,255,.07);
+      color: var(--muted);
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 600;
       padding: 2px 9px;
       border-radius: 99px;
+      margin-left: 10px;
+      vertical-align: middle;
     }
 
-    .section-divider {
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* ── Featured cards ── */
+    /* ── Featured tiles ── */
     .featured-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
     }
 
     .featured-card {
       background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 32px;
+      padding: 40px;
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      transition: border-color .2s, transform .2s, box-shadow .2s;
-      position: relative;
-      overflow: hidden;
+      gap: 18px;
+      transition: background .18s;
     }
 
-    .featured-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-    }
-
-    .featured-card:hover {
-      border-color: rgba(124,58,237,.6);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(124,58,237,.15);
-    }
+    .featured-card:hover { background: #1c1c1e; }
 
     .featured-label {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      background: rgba(124,58,237,.15);
-      border: 1px solid rgba(124,58,237,.3);
+      gap: 6px;
       color: var(--accent);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .08em;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .06em;
       text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 4px;
-      width: fit-content;
     }
 
     .featured-name {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 700;
       color: var(--text);
-      letter-spacing: -.01em;
+      letter-spacing: -.02em;
     }
 
     .featured-desc {
       font-size: 14px;
       color: var(--muted);
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
     .featured-highlights {
       display: flex;
       flex-direction: column;
-      gap: 7px;
+      gap: 8px;
     }
 
     .highlight-item {
       display: flex;
       align-items: flex-start;
-      gap: 8px;
+      gap: 10px;
       font-size: 13px;
       color: var(--muted);
     }
 
     .highlight-item::before {
-      content: '→';
-      color: var(--accent2);
+      content: '–';
+      color: var(--accent);
       flex-shrink: 0;
       line-height: 1.6;
     }
 
     .featured-footer {
       display: flex;
-      align-items: center;
-      gap: 14px;
       flex-wrap: wrap;
+      gap: 6px;
       margin-top: auto;
-      padding-top: 8px;
+      padding-top: 14px;
       border-top: 1px solid var(--border);
     }
 
-    .featured-topics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
     .repo-topic {
-      background: rgba(56,189,248,.08);
-      border: 1px solid rgba(56,189,248,.15);
-      color: var(--accent2);
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      color: var(--muted);
       font-size: 11px;
       font-weight: 500;
-      padding: 2px 8px;
-      border-radius: 4px;
+      padding: 3px 9px;
+      border-radius: 6px;
     }
 
-    /* ── Regular repo grid ── */
+    /* ── Repo tiles ── */
     .repo-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 16px;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
     }
 
     .repo-card {
       background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
+      padding: 28px;
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      transition: border-color .2s, transform .2s, box-shadow .2s;
-      position: relative;
-      overflow: hidden;
+      gap: 10px;
+      transition: background .18s;
     }
 
-    .repo-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      opacity: 0;
-      transition: opacity .2s;
-    }
-
-    .repo-card:hover {
-      border-color: rgba(124,58,237,.5);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(124,58,237,.12);
-    }
-
-    .repo-card:hover::before { opacity: 1; }
+    .repo-card:hover { background: #1c1c1e; }
 
     .repo-name {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
       color: var(--text);
+      letter-spacing: -.01em;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .repo-name svg { width: 14px; height: 14px; color: var(--muted); flex-shrink: 0; }
+    .repo-name svg { width: 13px; height: 13px; color: var(--muted); flex-shrink: 0; }
 
     .repo-desc {
       font-size: 13px;
@@ -392,36 +355,11 @@
       flex-wrap: wrap;
     }
 
-    .lang-dot {
-      display: inline-block;
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .repo-lang {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .repo-stars {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .repo-stars svg { width: 13px; height: 13px; }
-
-    .repo-card .repo-topics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
+    .lang-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+    .repo-lang { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); }
+    .repo-stars { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--muted); }
+    .repo-stars svg { width: 12px; height: 12px; }
+    .repo-card .repo-topics { display: flex; flex-wrap: wrap; gap: 6px; }
 
     .lang-go      { background: #00add8; }
     .lang-c       { background: #555597; }
@@ -429,24 +367,25 @@
     .lang-ts      { background: #3178c6; }
     .lang-python  { background: #3572a5; }
     .lang-rust    { background: #dea584; }
-    .lang-default { background: #6e7681; }
+    .lang-default { background: #48484a; }
 
     /* ── States ── */
     .state-msg {
       text-align: center;
-      padding: 48px;
+      padding: 56px;
       color: var(--muted);
       font-size: 14px;
       grid-column: 1 / -1;
+      background: var(--card);
     }
 
     .spinner {
-      width: 32px; height: 32px;
-      border: 2px solid var(--border);
+      width: 28px; height: 28px;
+      border: 1.5px solid rgba(255,255,255,.1);
       border-top-color: var(--accent);
       border-radius: 50%;
       animation: spin .8s linear infinite;
-      margin: 0 auto 16px;
+      margin: 0 auto 14px;
     }
 
     @keyframes spin { to { transform: rotate(360deg); } }
@@ -454,20 +393,25 @@
     /* ── Footer ── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 32px 0;
+      padding: 28px 0;
       text-align: center;
       color: var(--muted);
       font-size: 12px;
     }
 
-    footer a { color: var(--accent2); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
 
     /* ── Responsive ── */
-    @media (max-width: 720px) {
+    @media (max-width: 860px) {
       .featured-grid { grid-template-columns: 1fr; }
-      .hero { padding: 64px 0 56px; }
+    }
+
+    @media (max-width: 720px) {
+      .hero { min-height: calc(100svh - 52px); padding: 48px 0; }
       .nav-links { display: none; }
+      .wrapper { padding: 0 20px; }
+      .section { padding: 72px 0 56px; }
     }
   </style>
 </head>
@@ -486,29 +430,28 @@
 
   <section class="hero">
     <div class="wrapper">
-      <div class="hero-badge">Open to opportunities</div>
-      <h1>Denis Miretsky</h1>
-      <p>Security Platform Engineer building backend systems, security tooling, and DevSecOps pipelines.</p>
-
-      <div class="tags">
-        <span class="tag">Go</span>
-        <span class="tag">Systems Programming</span>
-        <span class="tag">DevSecOps</span>
-        <span class="tag">Security Tooling</span>
-        <span class="tag">CI/CD</span>
-        <span class="tag">Security Platform Engineering</span>
-        <span class="tag">Backend Engineering</span>
-      </div>
-
-      <div class="social-links">
-        <a class="social-btn" href="https://github.com/solardome" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-          GitHub
-        </a>
-        <a class="social-btn" href="mailto:miretskydenis@gmail.com">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          Contact
-        </a>
+      <div class="hero-inner">
+        <div class="hero-label">Security Platform Engineer</div>
+        <h1>Denis Miretsky</h1>
+        <div class="hero-status">
+          <span class="pulse-dot"></span>
+          Available for new roles
+        </div>
+        <p>13+ years building backend systems, security tooling, and CI/CD automation for large-scale enterprise environments. Go · Java · Python · AWS · Kubernetes.</p>
+        <div class="social-links">
+          <a class="social-btn social-btn-primary" href="https://www.linkedin.com/in/denis-miretsky-30953462/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+          <a class="social-btn" href="https://github.com/solardome" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            GitHub
+          </a>
+          <a class="social-btn" href="mailto:miretskydenis@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Contact
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -518,12 +461,10 @@
     <div class="wrapper">
       <div class="section-header">
         <h2>Featured Projects</h2>
-        <div class="section-divider"></div>
       </div>
 
       <div class="featured-grid">
 
-        <!-- security-gate -->
         <a class="featured-card" href="https://github.com/solardome/security-gate" target="_blank" rel="noopener">
           <div class="featured-label">
             <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
@@ -531,7 +472,7 @@
           </div>
           <div class="featured-name">security-gate</div>
           <div class="featured-desc">
-            A CLI tool that ingests vulnerability scanner output from Trivy, Snyk, SARIF, Checkmarx, and SonarQube,
+            CLI tool that ingests vulnerability scanner output from Trivy, Snyk, SARIF, Checkmarx, and SonarQube,
             normalizes findings into a unified model, and applies a deterministic policy engine to emit
             auditable <strong style="color:var(--text)">ALLOW / WARN / BLOCK</strong> release decisions with full decision traces.
           </div>
@@ -539,20 +480,17 @@
             <div class="highlight-item">Deterministic policy engine — same inputs always produce the same decision and trace</div>
             <div class="highlight-item">5 scanner adapters with strict envelope validation (Trivy, SARIF 2.1, Snyk, Checkmarx, Sonar)</div>
             <div class="highlight-item">Baseline diff mode for PR workflows — only gates on new findings</div>
-            <div class="highlight-item">Built in Go: interface-based adapters, structured logging, fuzz tests for all parsers</div>
+            <div class="highlight-item">Interface-based adapters, structured logging, fuzz tests for all parsers</div>
           </div>
           <div class="featured-footer">
-            <div class="featured-topics">
-              <span class="repo-topic">Go</span>
-              <span class="repo-topic">DevSecOps</span>
-              <span class="repo-topic">CI/CD</span>
-              <span class="repo-topic">Policy Engine</span>
-              <span class="repo-topic">SARIF</span>
-            </div>
+            <span class="repo-topic">Go</span>
+            <span class="repo-topic">DevSecOps</span>
+            <span class="repo-topic">CI/CD</span>
+            <span class="repo-topic">Policy Engine</span>
+            <span class="repo-topic">SARIF</span>
           </div>
         </a>
 
-        <!-- mini-kvstore -->
         <a class="featured-card" href="https://github.com/solardome/mini-kvstore" target="_blank" rel="noopener">
           <div class="featured-label">
             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
@@ -560,22 +498,22 @@
           </div>
           <div class="featured-name">mini-kvstore</div>
           <div class="featured-desc">
-            A minimal in-memory key-value store written in C, built with CMake, and shipped with a
-            production-grade CI/CD pipeline — demonstrating systems-level engineering with modern DevSecOps practices.
+            In-memory key-value store in C — hash table with open addressing, O(1) average-case
+            get/set/delete, and a read-write lock for concurrent access. Every commit runs ASan and UBSan
+            in CI; zero sanitizer warnings shipped.
           </div>
           <div class="featured-highlights">
-            <div class="highlight-item">Written in C with CMake build system</div>
-            <div class="highlight-item">CI/CD pipeline with GitHub Actions, address and undefined-behavior sanitizers</div>
-            <div class="highlight-item">Applies DevSecOps principles at the systems layer</div>
+            <div class="highlight-item">Hash table with open addressing and linear probing — no external allocator dependencies</div>
+            <div class="highlight-item">Reader-writer lock for safe concurrent access without global serialization</div>
+            <div class="highlight-item">AddressSanitizer + UndefinedBehaviorSanitizer enforced in GitHub Actions on every push</div>
+            <div class="highlight-item">CMake build with separate Debug/Release targets; valgrind clean in Debug mode</div>
           </div>
           <div class="featured-footer">
-            <div class="featured-topics">
-              <span class="repo-topic">C</span>
-              <span class="repo-topic">CMake</span>
-              <span class="repo-topic">GitHub Actions</span>
-              <span class="repo-topic">Sanitizers</span>
-              <span class="repo-topic">DevSecOps</span>
-            </div>
+            <span class="repo-topic">C</span>
+            <span class="repo-topic">CMake</span>
+            <span class="repo-topic">GitHub Actions</span>
+            <span class="repo-topic">Sanitizers</span>
+            <span class="repo-topic">DevSecOps</span>
           </div>
         </a>
 
@@ -587,9 +525,7 @@
   <section class="section" id="projects">
     <div class="wrapper">
       <div class="section-header">
-        <h2>All Projects</h2>
-        <span class="count" id="projects-count">—</span>
-        <div class="section-divider"></div>
+        <h2>All Projects</h2><span class="count" id="projects-count">—</span>
       </div>
       <div class="repo-grid" id="projects-grid">
         <div class="state-msg">
@@ -602,15 +538,14 @@
 
   <footer>
     <div class="wrapper">
-      Built with the <a href="https://docs.github.com/en/rest" target="_blank" rel="noopener">GitHub REST API</a> ·
+      © 2026 Denis Miretsky ·
       <a href="https://github.com/solardome" target="_blank" rel="noopener">github.com/solardome</a>
     </div>
   </footer>
 
   <script>
-    const GITHUB_USER  = 'solardome';
-    const SITE_REPO    = `${GITHUB_USER}.github.io`;
-    const FEATURED_IDS = ['security-gate', 'mini-kvstore'];
+    const GITHUB_USER = 'solardome';
+    const SITE_REPO   = `${GITHUB_USER}.github.io`;
 
     const langColors = {
       Go: 'lang-go', C: 'lang-c', JavaScript: 'lang-js',
@@ -620,7 +555,7 @@
     function langClass(l) { return langColors[l] || 'lang-default'; }
 
     function repoCard(repo) {
-      const desc    = repo.description || '<em style="opacity:.6">No description</em>';
+      const desc    = repo.description || '<em style="opacity:.5">No description</em>';
       const langDot = repo.language
         ? `<span class="repo-lang"><span class="lang-dot ${langClass(repo.language)}"></span>${repo.language}</span>` : '';
       const stars = repo.stargazers_count > 0
@@ -661,7 +596,7 @@
         }
       } catch {
         document.getElementById('projects-grid').innerHTML =
-          `<div class="state-msg">Could not load repositories. <a href="https://github.com/${GITHUB_USER}" style="color:var(--accent2)">View on GitHub →</a></div>`;
+          `<div class="state-msg">Could not load repositories. <a href="https://github.com/${GITHUB_USER}" style="color:var(--accent)">View on GitHub →</a></div>`;
         return;
       }
 

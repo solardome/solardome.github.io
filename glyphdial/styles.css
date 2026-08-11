@@ -46,14 +46,10 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; 
 }
 
 .wordmark-mark {
-  display: grid;
   width: 27px;
   height: 27px;
-  place-items: center;
   border-radius: 50%;
-  background: var(--foreground);
-  color: var(--accent);
-  font-size: 15px;
+  object-fit: cover;
 }
 
 nav, footer div { display: flex; gap: 22px; }

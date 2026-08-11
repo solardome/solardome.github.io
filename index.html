@@ -315,6 +315,47 @@
       font-weight: 400;
     }
 
+    /* ─── Featured project ─── */
+    .project-card {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 28px;
+      padding: 32px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+    }
+
+    .project-icon {
+      width: 76px;
+      height: 76px;
+      border-radius: 18px;
+      display: block;
+    }
+
+    .project-card h3 {
+      font-size: 24px;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+    }
+
+    .project-card p {
+      max-width: 58ch;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
     /* ─── Case studies ─── */
     .case-list {
       display: grid;
@@ -603,6 +644,15 @@
       .archive-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .project-card {
+        grid-template-columns: auto minmax(0, 1fr);
+      }
+
+      .project-links {
+        grid-column: 2;
+        justify-content: flex-start;
+      }
     }
 
     @media (max-width: 680px) {
@@ -644,6 +694,17 @@
         grid-template-columns: 1fr;
       }
 
+      .project-card {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 28px;
+      }
+
+      .project-links {
+        grid-column: auto;
+        justify-content: flex-start;
+      }
+
       .archive-topline,
       .footer-shell {
         flex-direction: column;
@@ -678,7 +739,7 @@
         <li><a href="#work">Work</a></li>
         <li><a href="#archive">Archive</a></li>
       </ul>
-      <a class="nav-cta" href="mailto:miretskydenis@gmail.com">Get in touch</a>
+      <a class="nav-cta" href="mailto:solardome.support@gmail.com">Get in touch</a>
     </div>
   </nav>
 
@@ -752,6 +813,28 @@
             <p>SAST/SCA gates, IAM workflows, CVE triage, and policy checks integrated into delivery.</p>
           </article>
         </div>
+      </div>
+    </section>
+
+    <section id="glyphdial">
+      <div class="wrapper">
+        <div class="section-label">
+          <span class="eyebrow">New project</span>
+          <h2>GlyphDial for macOS</h2>
+          <p>A focused utility for choosing keyboard input sources with a deterministic radial menu.</p>
+        </div>
+
+        <article class="project-card">
+          <img class="project-icon" src="/glyphdial/icon.png" alt="GlyphDial app icon" width="76" height="76" />
+          <div>
+            <h3>Choose an input source by direction.</h3>
+            <p>Hold the trigger, press a physical arrow-key direction, and release. GlyphDial keeps keyboard processing local and never inspects or stores typed text.</p>
+          </div>
+          <div class="project-links">
+            <a class="button button-primary" href="/glyphdial/">Learn about GlyphDial</a>
+            <a class="button button-secondary" href="/glyphdial/support/">Support</a>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -871,7 +954,7 @@
     <div class="wrapper footer-shell">
       <div>© 2026 Denis Miretsky</div>
       <div class="footer-links">
-        <a href="mailto:miretskydenis@gmail.com">Email</a>
+        <a href="mailto:solardome.support@gmail.com">Email</a>
         <a href="https://www.linkedin.com/in/denis-miretsky-30953462/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/solardome" target="_blank" rel="noopener">GitHub</a>
       </div>

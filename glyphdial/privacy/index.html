@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="GlyphDial privacy policy.">
+    <title>Privacy Policy · GlyphDial</title>
+    <link rel="stylesheet" href="/glyphdial/styles.css">
+  </head>
+  <body>
+    <main>
+      <div class="shell policy-shell">
+        <header class="site-header">
+          <a class="wordmark" href="/glyphdial/" aria-label="GlyphDial home"><span class="wordmark-mark" aria-hidden="true">✦</span>GlyphDial</a>
+          <nav aria-label="Primary navigation"><a aria-current="page" href="/glyphdial/privacy/">Privacy</a><a href="/glyphdial/support/">Support</a></nav>
+        </header>
+        <article class="policy">
+          <p class="eyebrow">Privacy policy</p>
+          <h1>Privacy is the product boundary.</h1>
+          <p class="effective">Effective August 3, 2026</p>
+          <p class="policy-intro">GlyphDial is designed so typed text is never recorded, reconstructed, stored, or transmitted.</p>
+          <section>
+            <h2>Local input processing</h2>
+            <p>After the user grants Input Monitoring, GlyphDial uses a passive, listen-only system event tap to observe modifier transitions needed for the selected activation mode: Fn/Globe + Left Option, Left Option alone, or Right Option alone. After the user also grants Accessibility, a second short-lived active event tap runs only while the radial menu is visible. It observes and suppresses only the selected physical directional-key cluster — a down event, its repeats, and its matching up — so those keys cannot type into the foreground application during a selection. It does not translate key codes into characters. All unrelated keys and all pointer events pass through unchanged.</p>
+            <p>GlyphDial may process locally only the modifier state needed for the chosen activation mode, physical key codes in the selected directional cluster during an active interaction, the direction derived from those fixed positions, the current pointer position once to place the overlay, and configured input-source identifiers.</p>
+            <p>GlyphDial never requests Unicode text, translates key events to characters, inspects the foreground application, reads the clipboard, or accesses document, browser, password, or text-field contents. It stores no keyboard-event stream. Secure Input is treated as a privacy boundary rather than bypassed.</p>
+          </section>
+          <section>
+            <h2>Local storage</h2>
+            <p>GlyphDial stores only its schema version, two to four input-source identifiers paired with fixed directions, the selected activation mode, onboarding progress, any incomplete onboarding draft, the local trial start, and the latest observed trial-clock date. The two trial dates are also kept in the user&apos;s macOS Keychain so an ordinary reinstall does not restart the trial. An onboarding draft contains only source identifiers and fixed directions. When older ordered configuration data is migrated, obsolete physical-key fields are ignored and never executed.</p>
+          </section>
+          <section>
+            <h2>Apple StoreKit</h2>
+            <p>GlyphDial has no analytics, telemetry, backend, cloud sync, third-party dependencies, or developer-controlled network client. Apple StoreKit may communicate with the App Store to load GlyphDial Full Access product information, check entitlement, complete a purchase, or restore a purchase. The seven-day trial itself is local and does not contact Apple. GlyphDial receives only localized product information and verified entitlement state from StoreKit. It does not receive an Apple ID or payment method. Keyboard-related data and local configuration are never transmitted or attached to StoreKit activity.</p>
+          </section>
+          <section>
+            <h2>Diagnostics</h2>
+            <p>GlyphDial contains no third-party crash reporter and sends no developer-owned diagnostics. macOS and the App Store may collect diagnostics under the user&apos;s Apple system settings; GlyphDial does not add keyboard data to those reports.</p>
+          </section>
+          <section>
+            <h2>Controls and deletion</h2>
+            <p>Users can stop event monitoring by choosing <strong>Quit GlyphDial</strong> in the menu-bar menu. Input Monitoring permission can be revoked in System Settings. Deleting GlyphDial&apos;s sandboxed preferences removes its local configuration. Trial dates can remain in the user&apos;s Keychain until those GlyphDial entries are removed there. GlyphDial has no server-side user account or developer-held user record to delete.</p>
+          </section>
+        </article>
+        <footer><span>GlyphDial for macOS</span><div><a href="/glyphdial/privacy/">Privacy Policy</a><a href="/glyphdial/support/">Support</a></div></footer>
+      </div>
+    </main>
+  </body>
+</html>
